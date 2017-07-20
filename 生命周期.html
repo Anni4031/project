@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+    	<div id="vm">a的值{{ a }}</div>
+		<script>
+			var vm=new Vue({
+				el:"#vm",
+				data:{
+					a:1
+				},
+				methods:{
+					getDate:function(){
+						console.log(this.a)
+					}
+				},
+				
+				mounted:function(){
+					console.log("呵呵!执行到这里了!")//常常用在:页面加载完成后采取调用的方法,放这里面mounted
+					// this.getDate();//this指Vue实例(内部调用方法)
+					console.log("Vue实例:",this)
+					let that=this;
+					function test(){
+						// 想在这里调用Vue实例内的getDate方法,该如何调用
+						// this.getDate();//报错
+						console.log("内部this指向位置:",this,"内部that指向位置:",that)//内部this指向位置:[object Window](指向全局去了)
+						function bb(){
+							//假如想在这里 拿到Vue实例对象,如何做?
+							console.log("内部的内部this指向位置:",this,"内部that指向位置:",that)//Window
+						}
+						bb()
+					}
+					test()
+				},
+				beforeCreate:function(){
+					console.log("呵呵!vue实例即将创建!")
+				},
+				beforeDestroy:function(){
+					console.log("销毁前----")
+
+				},
+				// vue实例销毁后调用
+				destroyed:function(){
+					console.log("你的Vue实例已经被销毁!")
+				}
+			})
+			// 外部调用Vue实例内部的方法
+			vm.getDate()
+			vm.a=88
+			// 解绑他的全部指令及事件监听器
+			setTimeout(function(){
+				vm.$destroy()
+				vm.a=999;
+			},3000)
+			
+
+
+		</script>
+    </body>
+</html>

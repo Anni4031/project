@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue"></script>
+        <style>
+        	[v-cloak] {
+        	  /* display: none; */
+        	}
+        	[role]{
+        		background: pink;
+        	}
+        </style>
+    </head>
+    <body v-cloak>
+    	<div id="app" role="a">
+
+    		<!-- 方法处理器 -->
+    		<button v-on:click="doThis(999,88)">这是个按钮</button>
+    		<!-- 缩写 -->
+    		<button @click="doThis(33,44)">缩写事件</button>
+    		<!-- 对象语法 (2.4.0+) -->
+    		<button v-on="{ mousedown: doThis, mouseup: doThat }">doThis或doThat</button>
+    	</div>
+
+    	<script>
+    		var vm=new Vue({
+    		    el:"#app",
+    		    data:{
+    		        a:1
+    		    },
+    		    methods:{
+    		        getDate:function(){
+    		            console.log(this.a)
+    		        },
+    		        doThis:function(a,b){
+    		        	console.log("你被点击了,传入参数为:",a,b)
+    		        },
+    		        doThat:function(){
+    		        	console.log("doThat函数:")
+    		        }
+    		    }
+    		})
+    		       
+    			
+
+    	</script>
+    	
+    </body>
+</html>
