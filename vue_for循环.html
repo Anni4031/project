@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+    	<div id="fors" >
+    		<ol>
+    		    <li v-for="info in infos">
+    		      {{ info.name }},{{ info.sex }},<span v-for="hobby in info.hobby ">{{ hobby.a }}</span>
+    		    </li>
+    		</ol>
+    	</div>
+
+    	<script>
+    		var fors=new Vue({
+    			el:"#fors",
+    			data:{
+    				"infos":[
+    						{"name":"何青杏","sex":"女","hobby":[{"a":"看电影"}]},
+    						{
+                                "name":"丁苗","sex":"女","hobby":[{"a":"轮滑"},{"a":"听音乐"}]
+                            },
+    						{"name":"李安妮","sex":"女","hobby":[{"a":"看书"}]}
+    				]
+    			}
+    		})
+    	</script>
+
+    </body>
+</html>
